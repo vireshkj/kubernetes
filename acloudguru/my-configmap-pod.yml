@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+  namespace: dev
+spec:
+  containers:
+  - name: busybox
+    image: busybox
+    command: ['sh', '-c', 'echo $(player_initial_lives) && sleep 3600']
+    env:
+    - name: player_initial_lives
+      valueFrom: 
+        configMapKeyRef:
+          name: game-demo
+          key: player_initial_lives
